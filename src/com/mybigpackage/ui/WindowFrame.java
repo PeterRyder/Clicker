@@ -12,10 +12,10 @@ public class WindowFrame implements ActionListener {
 
     Money money;
 
-    JFrame frame;
+    public JFrame frame;
 
-    JButton clicker = new JButton("Click Me!");
-    JLabel moneyLabel = new JLabel("Money: ");
+    public JButton clicker = new JButton("Click Me!");
+    public JLabel moneyLabel = new JLabel("Money: ");
 
     public WindowFrame(Money money) {
         this.frame = new JFrame(this.title);
@@ -26,7 +26,11 @@ public class WindowFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         money.increment(1);
-        this.moneyLabel.setText(String.valueOf(money.moneyAmount()));
+        setMoneyLabel(String.valueOf(money.moneyAmount()));
+    }
+
+    public void setMoneyLabel(String amount) {
+        this.moneyLabel.setText(amount);
     }
 
     private void addComponents(Container pane) {
