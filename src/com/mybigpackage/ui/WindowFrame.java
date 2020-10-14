@@ -30,31 +30,32 @@ public class WindowFrame implements ActionListener {
     }
 
     public void setMoneyLabel(String amount) {
-        this.moneyLabel.setText(amount);
+        this.moneyLabel.setText("Money: " + amount);
     }
 
     private void addComponents(Container pane) {
-        pane.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        pane.add(clicker, c);
+        pane.add(moneyLabel);
+        pane.add(new Label(""));
+        pane.add(new Label(""));
+        pane.add(new Button("Upgrade 1 10 Monies"));
+        pane.add(new Label(""));
+        pane.add(new Label(""));
+        pane.add(new Button("Upgrade 2 100 Monies"));
+        pane.add(new Label(""));
+        pane.add(new Label(""));
+        pane.add(new Button("Upgrade 3 1000 Monies"));
+        pane.add(clicker);
+        pane.add(new Label(""));
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 1;
-        c.gridy = 0;
-        pane.add(moneyLabel, c);
+        pane.setLayout(new GridLayout(4,3));
 
         clicker.addActionListener(this);
-
     }
 
     public void display() {
         this.frame.setLocationRelativeTo(null);
-        this.frame.setSize(new Dimension(600, 800));
-        this.frame.pack();
+        this.frame.setSize(new Dimension(600, 400));
         this.frame.setVisible(true);
     }
 

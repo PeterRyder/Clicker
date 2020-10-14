@@ -12,7 +12,7 @@ public class Money {
         this.money -= amount;
     }
 
-    public long moneyAmount() {
+    public synchronized long moneyAmount() {
         return this.money;
     }
 }
