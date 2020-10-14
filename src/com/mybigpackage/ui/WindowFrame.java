@@ -1,9 +1,7 @@
 package com.mybigpackage.ui;
 
 import com.mybigpackage.money.Money;
-import com.mybigpackage.upgrade.Upgrade1;
-import com.mybigpackage.upgrade.Upgrade2;
-import com.mybigpackage.upgrade.Upgrade3;
+import com.mybigpackage.upgrade.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,24 +21,31 @@ public class WindowFrame implements ActionListener {
     JButton upgrade1_button;
     JButton upgrade2_button;
     JButton upgrade3_button;
+    JButton upgradeTick_button;
+    JButton upgradeClick_button;
+
 
     public Upgrade1 upgrade1;
     public Upgrade2 upgrade2;
     public Upgrade3 upgrade3;
+    public UpgradeClick upgradeClick;
+    public UpgradeTick upgradeTick;
 
-    public WindowFrame(Money money, Upgrade1 upgrade1, Upgrade2 upgrade2, Upgrade3 upgrade3) {
+    public WindowFrame(Money money, Upgrade1 upgrade1, Upgrade2 upgrade2, Upgrade3 upgrade3, UpgradeClick upgradeClick, UpgradeTick upgradeTick) {
         this.frame = new JFrame(this.title);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.money = money;
         this.upgrade1 = upgrade1;
         this.upgrade2 = upgrade2;
         this.upgrade3 = upgrade3;
+        this.upgradeClick = upgradeClick;
+        this.upgradeTick = upgradeTick;
 
         addComponents(frame.getContentPane());
     }
 
     public void actionPerformed(ActionEvent e) {
-        money.increment(1);
+        money.increment(upgradeClick.getAmt());
         setMoneyLabel(String.valueOf(money.moneyAmount()));
     }
 
@@ -53,12 +58,21 @@ public class WindowFrame implements ActionListener {
     }
 
     public void setUpgrade2Label() {
-        this.upgrade2_button.setText(String.format("Upgrade1 Cost: %s Amount: %s", this.upgrade2.getCost(), this.upgrade2.getAmt()));
+        this.upgrade2_button.setText(String.format("Upgrade2 Cost: %s Amount: %s", this.upgrade2.getCost(), this.upgrade2.getAmt()));
     }
 
     public void setUpgrade3Label() {
-        this.upgrade3_button.setText(String.format("Upgrade1 Cost: %s Amount: %s", this.upgrade3.getCost(), this.upgrade3.getAmt()));
+        this.upgrade3_button.setText(String.format("Upgrade3 Cost: %s Amount: %s", this.upgrade3.getCost(), this.upgrade3.getAmt()));
     }
+
+    public void setUpgradeTickLabel() {
+        this.upgradeTick_button.setText(String.format("Upgrade Tick Cost: %s Amount: %s", this.upgradeTick.getCost(), this.upgradeTick.getAmt()));
+    }
+
+    public void setUpgradeClickLabel() {
+        this.upgradeClick_button.setText(String.format("Upgrade Click Cost: %s Amount: %s", this.upgradeClick.getCost(), this.upgradeClick.getAmt()));
+    }
+
 
     private void addComponents(Container pane) {
 
@@ -95,6 +109,28 @@ public class WindowFrame implements ActionListener {
         });
         this.setUpgrade3Label();
 
+        upgradeTick_button = new JButton("UpgradeTick");
+        upgradeTick_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                upgradeTick.upgrade();
+                setMoneyLabel(String.valueOf(money.moneyAmount()));
+                setUpgradeTickLabel();
+            }
+        });
+        this.setUpgradeTickLabel();
+
+        upgradeClick_button = new JButton("Upgrade3");
+        upgradeClick_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                upgradeClick.upgrade();
+                setMoneyLabel(String.valueOf(money.moneyAmount()));
+                setUpgradeClickLabel();
+            }
+        });
+        this.setUpgradeClickLabel();
+
         pane.add(moneyLabel);
         pane.add(new Label(""));
         pane.add(new Label(""));
@@ -103,10 +139,10 @@ public class WindowFrame implements ActionListener {
         pane.add(new Label(""));
         pane.add(upgrade2_button);
         pane.add(new Label(""));
-        pane.add(new Label(""));
+        pane.add(upgradeTick_button);
         pane.add(upgrade3_button);
         pane.add(clicker);
-        pane.add(new Label(""));
+        pane.add(upgradeClick_button);
 
         pane.setLayout(new GridLayout(4,3));
 
