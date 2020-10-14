@@ -24,7 +24,10 @@ public class UpgradeTick extends Upgrade{
     @Override
     public void upgrade() {
         long total = money.moneyAmount();
-        if (cost <= total) {
+        if (amt == 10) {
+
+        }
+        else if (cost <= total) {
             money.decrement(cost);
             amt -= 10;
             cost += 1000;
