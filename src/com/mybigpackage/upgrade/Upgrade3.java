@@ -24,12 +24,10 @@ public class Upgrade3 extends Upgrade {
     @Override
     public void upgrade() {
         long total = money.moneyAmount();
-        if (cost < total) {
+        if (cost <= total) {
             money.decrement(cost);
             amt++;
             cost += 100;
-        }
-        else {
         }
     }
 }

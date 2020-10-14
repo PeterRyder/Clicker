@@ -13,12 +13,11 @@ public class Main {
 	    System.out.println("Starting Clicker");
 
 	    Money money = new Money();
-        WindowFrame frame = new WindowFrame(money);
-        Upgrade upgrade = new Upgrade(money);
         Upgrade1 upgrade1 = new Upgrade1(money);
         Upgrade2 upgrade2 = new Upgrade2(money);
         Upgrade3 upgrade3 = new Upgrade3(money);
-        Upgrade a[] = {upgrade1,upgrade2,upgrade3};
+        WindowFrame frame = new WindowFrame(money, upgrade1, upgrade2, upgrade3);
+        Upgrade upgrade = new Upgrade(money);
         Runnable bg_thread = new BackgroundThread(money, frame, upgrade, upgrade1, upgrade2, upgrade3);
         new Thread(bg_thread).start();
 

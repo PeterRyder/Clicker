@@ -37,11 +37,9 @@ public class BackgroundThread implements Runnable {
             upgrade2amt = upgrade2.getAmt();
             upgrade3amt = upgrade3.getAmt();
 
-            total = upgrade1amt * 1;
-
-            total = upgrade2amt * 10;
-
-            total = upgrade3amt * 100;
+            total = upgrade1amt;
+            total += upgrade2amt * 10;
+            total += upgrade3amt * 100;
 
             this.money.increment(total);
             this.frame.setMoneyLabel(String.valueOf(money.moneyAmount()));
