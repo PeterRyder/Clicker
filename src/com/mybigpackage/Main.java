@@ -10,16 +10,12 @@ public class Main {
 	    System.out.println("Starting Clicker");
 
 	    Money money = new Money();
-        Upgrade1 upgrade1 = new Upgrade1(money);
-        Upgrade2 upgrade2 = new Upgrade2(money);
-        Upgrade3 upgrade3 = new Upgrade3(money);
-        UpgradeClick upgradeClick = new UpgradeClick(money);
-        UpgradeTick upgradeTick = new UpgradeTick(money);
-        WindowFrame frame = new WindowFrame(money, upgrade1, upgrade2, upgrade3, upgradeClick, upgradeTick);
         Upgrade upgrade = new Upgrade(money);
-        Runnable bg_thread = new BackgroundThread(money, frame, upgrade, upgrade1, upgrade2, upgrade3, upgradeTick);
+        WindowFrame frame = new WindowFrame(money, upgrade);
+        Runnable bg_thread = new BackgroundThread(money, frame, upgrade);
         new Thread(bg_thread).start();
 
         frame.display();
+
     }
 }

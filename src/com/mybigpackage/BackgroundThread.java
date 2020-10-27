@@ -9,38 +9,39 @@ public class BackgroundThread implements Runnable {
     Money money;
     WindowFrame frame;
     Upgrade upgrade;
-    Upgrade1 upgrade1;
-    Upgrade2 upgrade2;
-    Upgrade3 upgrade3;
-    UpgradeTick upgradeTick;
     int total;
     int upgrade1amt;
     int upgrade2amt;
     int upgrade3amt;
+    int upgrade4amt;
+    int upgrade5amt;
+    int upgrade6amt;
     long tick = 1000;
 
-    public BackgroundThread(Money money, WindowFrame frame, Upgrade upgrade, Upgrade1 upgrade1, Upgrade2 upgrade2, Upgrade3 upgrade3, UpgradeTick upgradeTick) {
+    public BackgroundThread(Money money, WindowFrame frame, Upgrade upgrade) {
         this.money = money;
         this.frame = frame;
         this.upgrade = upgrade;
-        this.upgrade1 = upgrade1;
-        this.upgrade2 = upgrade2;
-        this.upgrade3 = upgrade3;
-        this.upgradeTick = upgradeTick;
     }
 
     @Override
     public void run() {
         while (true) {
 
-            upgrade1amt = upgrade1.getAmt();
-            upgrade2amt = upgrade2.getAmt();
-            upgrade3amt = upgrade3.getAmt();
-            tick = upgradeTick.getAmt();
+            upgrade1amt = upgrade.getAmt1();
+            upgrade2amt = upgrade.getAmt2();
+            upgrade3amt = upgrade.getAmt3();
+            upgrade4amt = upgrade.getAmt4();
+            upgrade5amt = upgrade.getAmt5();
+            upgrade6amt = upgrade.getAmt6();
+            tick = upgrade.getAmtT();
 
             total = upgrade1amt;
             total += upgrade2amt * 10;
             total += upgrade3amt * 100;
+            total += upgrade4amt * 1000;
+            total += upgrade5amt * 10000;
+            total += upgrade6amt * 100000;
 
             this.money.increment(total);
             this.frame.setMoneyLabel(String.valueOf(money.moneyAmount()));
